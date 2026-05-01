@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html class="light" lang="uz">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#45474c",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#545f73",
+                        "primary-fixed-dim": "#bcc7de",
+                        "outline-variant": "#c5c6cd",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "primary-container": "#1e293b",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d8dadc",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#bcc7de",
+                        "on-primary-container": "#8590a6",
+                        "primary-fixed": "#d8e3fb",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed": "#25005a",
+                        "surface-bright": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#00190e",
+                        "secondary-fixed": "#eaddff",
+                        "secondary": "#712ae2",
+                        "outline": "#75777d",
+                        "on-primary-fixed": "#111c2d",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#00301e",
+                        "primary": "#091426",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed-variant": "#3c475a",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "secondary-container": "#8a4cfc",
+                        "on-tertiary-container": "#00a472"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "stack-sm": "8px",
+                        "container-margin": "32px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "card-padding": "24px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "data-mono": ["monospace"]
+                    },
+                    "fontSize": {
+                        "h1": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h3": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-mono": ["13px", { "lineHeight": "1.4", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body class="flex min-h-screen">
+    <!-- Sidebar Navigation -->
+    <aside
+        class="h-screen w-64 border-r border-slate-200 bg-white flex-shrink-0 flex flex-col py-6 shadow-[4px_0_24px_rgba(30,41,59,0.04)] sticky top-0">
+        <div class="px-6 mb-10">
+            <h1 class="text-xl font-black text-[#1E293B]">UzbekSentiment</h1>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Linguistic Analysis Pro</p>
+        </div>
+        <nav class="flex-1 space-y-1 px-3">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-sans text-sm font-medium">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined">analytics</span>
+                <span class="font-sans text-sm font-medium">Text Analysis</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined">history</span>
+                <span class="font-sans text-sm font-medium">History</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-slate-50 text-purple-600 font-bold border-r-4 border-purple-600 scale-[0.98] transition-transform"
+                href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+                <span class="font-sans text-sm">Dictionaries</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined">gavel</span>
+                <span class="font-sans text-sm font-medium">Rules</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined">bar_chart</span>
+                <span class="font-sans text-sm font-medium">Statistics</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-sans text-sm font-medium">Settings</span>
+            </a>
+        </nav>
+        <div class="mt-auto px-6 border-t border-slate-100 pt-6">
+            <div class="flex items-center gap-3">
+                <img alt="Default user avatar"
+                    class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white font-bold"
+                    src="assets/default-avatar.svg" />
+                <div>
+                    <p class="text-sm font-bold text-primary">admin admin</p>
+                    <p class="text-xs text-on-primary-container">admin</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <div class="flex-1 flex flex-col">
+        <!-- Top Navigation -->
+        <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
+            <div class="flex items-center justify-between px-8 h-16 max-w-[1440px] mx-auto">
+                <div class="flex items-center gap-4 w-1/2">
+                    <div class="relative w-full max-w-md group">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-purple-600">search</span>
+                        <input
+                            class="w-full pl-10 pr-4 py-2 bg-slate-100 border-none rounded-xl text-sm focus:ring-2 focus:ring-purple-500/20 transition-all"
+                            placeholder="So'zlarni qidirish..." type="text" />
+                    </div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <button class="text-slate-500 hover:text-slate-900 transition-colors">
+                        <span class="material-symbols-outlined">dark_mode</span>
+                    </button>
+                    <button class="relative text-slate-500 hover:text-slate-900 transition-colors">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span
+                            class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                    </button>
+                    <div class="h-8 w-[1px] bg-slate-200"></div>
+                    <button class="text-sm font-medium text-slate-600 hover:text-purple-600 transition-colors">Profile
+                        Settings</button>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content -->
+        <main class="p-8 max-w-[1440px] mx-auto w-full">
+            <!-- Header Section -->
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <h2 class="font-h1 text-h1 text-primary">Lug'atlarni boshqarish</h2>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Sentiment tahlili uchun lingvistik
+                        bazani tahrirlash va yangilash.</p>
+                </div>
+                <div class="flex gap-3">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-xl bg-white text-sm font-semibold text-primary hover:bg-slate-50 transition-all">
+                        <span class="material-symbols-outlined text-lg">download</span>
+                        Eksport
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-xl text-sm font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                        <span class="material-symbols-outlined text-lg">add</span>
+                        Yangi so'z qo'shish
+                    </button>
+                </div>
+            </div>
+            <!-- Dashboard Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-green-50 text-green-600 rounded-lg">
+                            <span class="material-symbols-outlined">mood</span>
+                        </div>
+                        <span class="text-xs font-bold text-green-600">+12%</span>
+                    </div>
+                    <p class="text-sm text-slate-500 font-medium">Ijobiy so'zlar</p>
+                    <h3 class="text-2xl font-bold text-primary mt-1">4,281</h3>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-red-50 text-red-600 rounded-lg">
+                            <span class="material-symbols-outlined">mood_bad</span>
+                        </div>
+                        <span class="text-xs font-bold text-red-600">+5%</span>
+                    </div>
+                    <p class="text-sm text-slate-500 font-medium">Salbiy so'zlar</p>
+                    <h3 class="text-2xl font-bold text-primary mt-1">3,892</h3>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-purple-50 text-purple-600 rounded-lg">
+                            <span class="material-symbols-outlined">bolt</span>
+                        </div>
+                        <span class="text-xs font-bold text-purple-600">Stabil</span>
+                    </div>
+                    <p class="text-sm text-slate-500 font-medium">Inkor/Kuchaytiruvchi</p>
+                    <h3 class="text-2xl font-bold text-primary mt-1">845</h3>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-blue-50 text-blue-600 rounded-lg">
+                            <span class="material-symbols-outlined">update</span>
+                        </div>
+                        <span class="text-xs font-bold text-blue-600">Bugun</span>
+                    </div>
+                    <p class="text-sm text-slate-500 font-medium">Oxirgi yangilanish</p>
+                    <h3 class="text-2xl font-bold text-primary mt-1">14:45</h3>
+                </div>
+            </div>
+            <!-- Management Section (Bento Layout) -->
+            <div class="grid grid-cols-12 gap-8">
+                <!-- Add Word Form -->
+                <div class="col-span-12 lg:col-span-4 space-y-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="font-h3 text-h3 text-primary mb-6">Yangi so'z qo'shish</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">So'z
+                                    yoki ibora</label>
+                                <input
+                                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all"
+                                    placeholder="Masalan: ajoyib" type="text" />
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label
+                                        class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Vazni
+                                        (Score)</label>
+                                    <input
+                                        class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all"
+                                        placeholder="1.0" step="0.1" type="number" />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Kategoriya</label>
+                                    <select
+                                        class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all text-sm">
+                                        <option>Ijobiy</option>
+                                        <option>Salbiy</option>
+                                        <option>Inkor/Kuch.</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button
+                                class="w-full py-3 bg-primary text-white font-bold rounded-xl mt-4 hover:bg-primary/90 transition-all active:scale-95">Bazaga
+                                saqlash</button>
+                        </form>
+                    </div>
+                    <div class="relative overflow-hidden rounded-xl h-64 shadow-xl">
+                        <img class="absolute inset-0 w-full h-full object-cover"
+                            data-alt="A sophisticated digital visualization of Uzbek linguistic nodes and connections, representing a complex neural network of words in a high-tech analytical environment. The scene is lit with cool blue and purple ambient tones, reflecting a professional and scientific atmosphere. Particles of light float between interconnected semantic groups, symbolizing data flow and sentiment weighting. The overall aesthetic is minimalist, clean, and highly technological, conveying precision and linguistic depth."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtTzu34a2VWki_ES2IS1gDtYSdKnMEI40h8Agchr8aD2gV3W4plYv1tsuTolKKoMQGVK8ECj84PX3BNqqd9oELS900uxW_oDvOaJil2ymACr1OBgDDQ83p55D4VFmN41vudx9R1c2hm6XW1VCaKIhKIySZuNR-85cByVtBb_MAaSIQFZTRorqicBCgkUmCbv0ITLICwbGqajXYC-2D8X9wBUzOCzuQsE8v0r6Xboqgu-JVF9cVjjam4NEPqdzWyqpj-0Y90SVYQEss" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex flex-col justify-end p-6">
+                            <h4 class="text-white font-bold text-lg leading-tight">NLP Algoritmlarini takomillashtiring
+                            </h4>
+                            <p class="text-slate-300 text-xs mt-2">To'g'ri lug'at tahlil sifatini 40% gacha oshirishi
+                                mumkin.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Data Table Section -->
+                <div class="col-span-12 lg:col-span-8">
+                    <div
+                        class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col h-full">
+                        <!-- Custom Tabs -->
+                        <div class="flex border-b border-slate-100 px-6 bg-slate-50/50">
+                            <button
+                                class="px-6 py-4 text-sm font-bold border-b-2 border-purple-600 text-purple-600">Ijobiy
+                                so‘zlar</button>
+                            <button
+                                class="px-6 py-4 text-sm font-medium text-slate-500 hover:text-primary transition-colors">Salbiy
+                                so‘zlar</button>
+                            <button
+                                class="px-6 py-4 text-sm font-medium text-slate-500 hover:text-primary transition-colors">Inkorny/kuchaytiruvchi</button>
+                        </div>
+                        <!-- Table Header Filters -->
+                        <div class="p-6 flex justify-between items-center gap-4 bg-white">
+                            <div class="flex gap-2">
+                                <button
+                                    class="px-3 py-1.5 bg-slate-100 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-200 transition-all">Hammasi</button>
+                                <button
+                                    class="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all">Aktiv</button>
+                                <button
+                                    class="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all">Arxiv</button>
+                            </div>
+                            <div class="text-xs text-slate-400 font-medium">Jami: 4,281 natija</div>
+                        </div>
+                        <!-- Data Table -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-slate-50/50 border-y border-slate-100">
+                                    <tr>
+                                        <th
+                                            class="px-6 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                            So'z / Ibora</th>
+                                        <th
+                                            class="px-6 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">
+                                            Vazni (Score)</th>
+                                        <th
+                                            class="px-6 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                            Holat</th>
+                                        <th
+                                            class="px-6 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                            Sana</th>
+                                        <th
+                                            class="px-6 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">
+                                            Amallar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-50">
+                                    <tr class="hover:bg-slate-50/50 transition-colors group">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div
+                                                    class="w-8 h-8 rounded bg-green-50 text-green-600 flex items-center justify-center font-bold text-xs">
+                                                    A</div>
+                                                <span class="text-sm font-semibold text-primary">ajoyib</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
+                                            <span
+                                                class="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-lg">+1.0</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="flex items-center gap-1.5 text-xs font-bold text-green-600">
+                                                <span
+                                                    class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                                Aktiv
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 text-xs text-slate-500 font-medium">12.10.2023</td>
+                                        <td class="px-6 py-4 text-right">
+                                            <div
+                                                class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <button
+                                                    class="p-1.5 text-slate-400 hover:text-purple-600 transition-colors">
+                                                    <span class="material-symbols-outlined text-lg">edit</span>
+                                                </button>
+                                                <button
+                                                    class="p-1.5 text-slate-400 hover:text-red-600 transition-colors">
+                                                    <span class="material-symbols-outlined text-lg">delete</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/50 transition-colors group">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div
+                                                    class="w-8 h-8 rounded bg-green-50 text-green-600 flex items-center justify-center font-bold text-xs">
+                                                    M</div>
+                                                <span class="text-sm font-semibold text-primary">maftunkor</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
+                                            <span
+                                                class="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-lg">+0.8</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="flex items-center gap-1.5 text-xs font-bold text-green-600">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                                Aktiv
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 text-xs text-slate-500 font-medium">11.10.2023</td>
+                                        <td class="px-6 py-4 text-right">
+                                            <div
+                                                class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <button
+                                                    class="p-1.5 text-slate-400 hover:text-purple-600 transition-colors">
+                                                    <span class="material-symbols-outlined text-lg">edit</span>
+                                                </button>
+                                                <button
+                                                    class="p-1.5 text-slate-400 hover:text-red-600 transition-colors">
+                                                    <span class="material-symbols-outlined text-lg">delete</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/50 transition-colors group">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div
+                                                    class="w-8 h-8 rounded bg-green-50 text-green-600 flex items-center justify-center font-bold text-xs">
+                                                    B</div>
+                                                <span class="text-sm font-semibold text-primary">barakalla</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
+                                            <span
+                                                class="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-lg">+0.9</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="flex items-center gap-1.5 text-xs font-bold text-slate-400">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+                                                Arxiv
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 text-xs text-slate-500 font-medium">10.10.2023</td>
+                                        <td class="px-6 py-4 text-right">
+                                            <div
+                                                class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <button
+                                                    class="p-1.5 text-slate-400 hover:text-purple-600 transition-colors">
+                                                    <span class="material-symbols-outlined text-lg">edit</span>
+                                                </button>
+                                                <button
+                                                    class="p-1.5 text-slate-400 hover:text-red-600 transition-colors">
+                                                    <span class="material-symbols-outlined text-lg">delete</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/50 transition-colors group">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div
+                                                    class="w-8 h-8 rounded bg-green-50 text-green-600 flex items-center justify-center font-bold text-xs">
+                                                    Y</div>
+                                                <span class="text-sm font-semibold text-primary">yaxshi</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
+                                            <span
+                                                class="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-lg">+0.5</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="flex items-center gap-1.5 text-xs font-bold text-green-600">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                                Aktiv
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 text-xs text-slate-500 font-medium">08.10.2023</td>
+                                        <td class="px-6 py-4 text-right">
+                                            <div
+                                                class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <button
+                                                    class="p-1.5 text-slate-400 hover:text-purple-600 transition-colors">
+                                                    <span class="material-symbols-outlined text-lg">edit</span>
+                                                </button>
+                                                <button
+                                                    class="p-1.5 text-slate-400 hover:text-red-600 transition-colors">
+                                                    <span class="material-symbols-outlined text-lg">delete</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/50 transition-colors group">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div
+                                                    class="w-8 h-8 rounded bg-green-50 text-green-600 flex items-center justify-center font-bold text-xs">
+                                                    G</div>
+                                                <span class="text-sm font-semibold text-primary">go'zal</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
+                                            <span
+                                                class="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-lg">+0.7</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="flex items-center gap-1.5 text-xs font-bold text-green-600">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                                Aktiv
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 text-xs text-slate-500 font-medium">05.10.2023</td>
+                                        <td class="px-6 py-4 text-right">
+                                            <div
+                                                class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <button
+                                                    class="p-1.5 text-slate-400 hover:text-purple-600 transition-colors">
+                                                    <span class="material-symbols-outlined text-lg">edit</span>
+                                                </button>
+                                                <button
+                                                    class="p-1.5 text-slate-400 hover:text-red-600 transition-colors">
+                                                    <span class="material-symbols-outlined text-lg">delete</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination -->
+                        <div class="mt-auto p-6 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-xs font-medium text-slate-400">1-10 dan 4,281 ta so'z
+                                ko'rsatilmoqda</span>
+                            <div class="flex gap-1">
+                                <button
+                                    class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50">
+                                    <span class="material-symbols-outlined text-sm">chevron_left</span>
+                                </button>
+                                <button
+                                    class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white text-xs font-bold">1</button>
+                                <button
+                                    class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-bold">2</button>
+                                <button
+                                    class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-bold">3</button>
+                                <button
+                                    class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50">
+                                    <span class="material-symbols-outlined text-sm">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/api-client.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/stats.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="uz">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#45474c",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#545f73",
+                        "primary-fixed-dim": "#bcc7de",
+                        "outline-variant": "#c5c6cd",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "primary-container": "#1e293b",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d8dadc",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#bcc7de",
+                        "on-primary-container": "#8590a6",
+                        "primary-fixed": "#d8e3fb",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed": "#25005a",
+                        "surface-bright": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#00190e",
+                        "secondary-fixed": "#eaddff",
+                        "secondary": "#712ae2",
+                        "outline": "#75777d",
+                        "on-primary-fixed": "#111c2d",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#00301e",
+                        "primary": "#091426",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed-variant": "#3c475a",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "secondary-container": "#8a4cfc",
+                        "on-tertiary-container": "#00a472"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "stack-sm": "8px",
+                        "container-margin": "32px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "card-padding": "24px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "data-mono": ["monospace"]
+                    },
+                    "fontSize": {
+                        "h1": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h3": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-mono": ["13px", { "lineHeight": "1.4", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f7f9fb;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(113, 42, 226, 0.03) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(9, 20, 38, 0.03) 0px, transparent 50%);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center p-6 font-body-md text-on-surface">
+    <!-- Toast Success Notification (Simulated) -->
+    <div
+        class="fixed top-8 right-8 z-[100] flex items-center gap-stack-md bg-white border border-outline-variant p-card-padding rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-sm transform translate-y-0 opacity-100 transition-all">
+        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-on-tertiary-container text-white">
+            <span class="material-symbols-outlined" data-icon="check_circle"
+                style="font-variation-settings: 'FILL' 1;">check_circle</span>
+        </div>
+        <div>
+            <p class="font-h3 text-h3 text-primary">Muvaffaqiyatli!</p>
+            <p class="font-body-md text-body-md text-on-surface-variant">Tizimga kirish tasdiqlandi.</p>
+        </div>
+    </div>
+    <!-- Main Auth Container -->
+    <main class="w-full max-w-[440px]">
+        <!-- Brand Header -->
+        <div class="text-center mb-stack-lg">
+            <div
+                class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary-container mb-stack-md shadow-lg">
+                <span class="material-symbols-outlined text-white text-3xl" data-icon="analytics"
+                    style="font-variation-settings: 'FILL' 1;">analytics</span>
+            </div>
+            <h1 class="font-h1 text-h1 text-primary tracking-tight">O‘zbek Sentiment</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Linguistik tahlil tizimi</p>
+        </div>
+        <!-- Auth Card -->
+        <div
+            class="bg-surface-container-lowest border border-outline-variant rounded-[24px] p-card-padding shadow-[0_4px_24px_rgba(30,41,59,0.06)] relative overflow-hidden">
+            <!-- Tab Toggle -->
+            <div class="flex p-1 bg-surface-container rounded-xl mb-stack-lg">
+                <button
+                    class="flex-1 py-2 text-label-caps font-label-caps bg-white text-secondary rounded-lg shadow-sm">
+                    KIRISH
+                </button>
+                <button
+                    class="flex-1 py-2 text-label-caps font-label-caps text-on-surface-variant hover:text-on-surface">
+                    RO‘YXATDAN O‘TISH
+                </button>
+            </div>
+            <form class="space-y-stack-md">
+                <!-- Email Field -->
+                <div class="space-y-1">
+                    <label class="font-label-caps text-label-caps text-on-surface-variant ml-1" for="email">ELEKTRON
+                        POCHTA</label>
+                    <div class="relative group">
+                        <span
+                            class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary transition-colors"
+                            data-icon="mail">mail</span>
+                        <input
+                            class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border border-outline-variant rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all font-body-md text-on-surface placeholder:text-outline/60"
+                            id="email" placeholder="example@domain.uz" type="email" />
+                    </div>
+                </div>
+                <!-- Password Field -->
+                <div class="space-y-1">
+                    <div class="flex justify-between items-center px-1">
+                        <label class="font-label-caps text-label-caps text-on-surface-variant"
+                            for="password">PAROL</label>
+                        <a class="text-[11px] font-semibold text-secondary hover:underline" href="#">PAROLNI
+                            UNUTDINGIZMI?</a>
+                    </div>
+                    <div class="relative group">
+                        <span
+                            class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary transition-colors"
+                            data-icon="lock">lock</span>
+                        <input
+                            class="w-full pl-12 pr-12 py-3.5 bg-surface-container-low border border-outline-variant rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all font-body-md text-on-surface placeholder:text-outline/60"
+                            id="password" placeholder="••••••••" type="password" />
+                        <button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface"
+                            type="button">
+                            <span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+                        </button>
+                    </div>
+                    <!-- Form Validation Mockup -->
+                    <p class="text-[11px] text-error mt-1 ml-1 flex items-center gap-1 hidden">
+                        <span class="material-symbols-outlined text-[14px]" data-icon="error">error</span>
+                        Parol kamida 8 ta belgidan iborat bo‘lishi kerak
+                    </p>
+                </div>
+                <!-- Remember Me -->
+                <div class="flex items-center gap-2 pt-1 ml-1">
+                    <input class="w-4 h-4 rounded border-outline-variant text-secondary focus:ring-secondary"
+                        id="remember" type="checkbox" />
+                    <label class="font-body-md text-[13px] text-on-surface-variant" for="remember">Meni eslab
+                        qolish</label>
+                </div>
+                <!-- Action Button (Loading State) -->
+                <button
+                    class="w-full mt-stack-md bg-primary text-white font-h3 text-h3 py-4 rounded-xl shadow-lg shadow-primary/10 hover:bg-on-primary-fixed-variant active:scale-[0.98] transition-all flex items-center justify-center gap-3"
+                    type="submit">
+                    <!-- Loading Spinner Mockup (hidden by default) -->
+                    <svg class="animate-spin h-5 w-5 text-white hidden" fill="none" viewbox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                        </circle>
+                        <path class="opacity-75"
+                            d="4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            fill="currentColor"></path>
+                    </svg>
+                    Tizimga kirish
+                </button>
+            </form>
+            <!-- Social Auth Divider -->
+            <div class="relative my-stack-lg">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-outline-variant"></div>
+                </div>
+                <div class="relative flex justify-center text-label-caps">
+                    <span class="px-4 bg-surface-container-lowest text-outline/60">YOKI DAVOM ETING</span>
+                </div>
+            </div>
+            <!-- Social Actions -->
+            <div class="grid grid-cols-2 gap-stack-md">
+                <button
+                    class="flex items-center justify-center gap-2 py-3 border border-outline-variant rounded-xl hover:bg-surface-container-low transition-colors font-semibold text-on-surface">
+                    <img alt="Google" class="w-4 h-4"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDevm-YQOvP3TUJ3_trnhnxPamCTUieNNxvLS1TC9RJraOOSYcq87xtoTXTTYMuZwGhid6DHBEd1omJt2GMfMTpEgtBlLn22yXXYygLBP9F6ZisLqpeYgdZ2wYFzSw2jot1K7WnwbHb1US2s7rD41OnaSDfjXeNqoZ7eqGKXF5urlGA8JvEHks5cNHvBPmHl9NL0s1GKS1ObCAvhZrjEfAjROvQse_Ktzl8kYPdCLb-1L4vST8rw_eau75H8zkBTnnz_OZQp5PMPDLh" />
+                    <span class="text-[13px]">Google</span>
+                </button>
+                <button
+                    class="flex items-center justify-center gap-2 py-3 border border-outline-variant rounded-xl hover:bg-surface-container-low transition-colors font-semibold text-on-surface">
+                    <span class="material-symbols-outlined text-blue-600" data-icon="facebook"
+                        style="font-variation-settings: 'FILL' 1;">social_leaderboard</span>
+                    <span class="text-[13px]">Facebook</span>
+                </button>
+            </div>
+        </div>
+        <!-- Secondary Info -->
+        <div class="mt-stack-lg flex flex-col items-center gap-stack-sm">
+            <p class="font-body-md text-body-md text-on-surface-variant">
+                Hisobingiz yo'qmi? <a class="text-secondary font-bold hover:underline" href="#">Ro‘yxatdan o‘ting</a>
+            </p>
+            <div class="flex gap-4 mt-2">
+                <a class="text-[12px] text-outline hover:text-on-surface-variant" href="#">Maxfiylik siyosati</a>
+                <a class="text-[12px] text-outline hover:text-on-surface-variant" href="#">Foydalanish shartlari</a>
+            </div>
+        </div>
+    </main>
+    <!-- Visual Decoration (Abstract) -->
+    <div class="fixed bottom-0 left-0 w-full h-full -z-10 opacity-40 pointer-events-none">
+        <div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-secondary/5 blur-[120px] rounded-full">
+        </div>
+        <div class="absolute top-[10%] right-[-5%] w-[300px] h-[300px] bg-primary/5 blur-[100px] rounded-full"></div>
+    </div>
+    <!-- Error Toast Placeholder (Hidden) -->
+    <div
+        class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] hidden items-center gap-stack-md bg-error-container text-on-error-container border border-error/20 p-4 rounded-xl shadow-xl max-w-sm">
+        <span class="material-symbols-outlined" data-icon="report">report</span>
+        <p class="font-body-md">Elektron pochta yoki parol noto‘g‘ri kiritilgan.</p>
+        <button class="ml-auto text-on-error-container/60 hover:text-on-error-container">
+            <span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+        </button>
+    </div>
+    <script src="js/api-client.js"></script>
+    <script src="js/login.js"></script>
+</body>
+
+</html>

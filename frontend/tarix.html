@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="light" lang="uz">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tahlillar Tarixi - UzbekSentiment</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#45474c",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#545f73",
+                        "primary-fixed-dim": "#bcc7de",
+                        "outline-variant": "#c5c6cd",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "primary-container": "#1e293b",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d8dadc",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#bcc7de",
+                        "on-primary-container": "#8590a6",
+                        "primary-fixed": "#d8e3fb",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed": "#25005a",
+                        "surface-bright": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#00190e",
+                        "secondary-fixed": "#eaddff",
+                        "secondary": "#712ae2",
+                        "outline": "#75777d",
+                        "on-primary-fixed": "#111c2d",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#00301e",
+                        "primary": "#091426",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed-variant": "#3c475a",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "secondary-container": "#8a4cfc",
+                        "on-tertiary-container": "#00a472"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "data-mono": ["monospace"]
+                    },
+                    "fontSize": {
+                        "h1": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h3": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-mono": ["13px", { "lineHeight": "1.4", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+
+        body {
+            background-color: #f7f9fb;
+        }
+    </style>
+</head>
+
+<body class="flex min-h-screen font-body-md text-on-surface">
+    <!-- SideNavBar (Authority Source: JSON) -->
+    <aside
+        class="h-screen w-64 border-r border-slate-200 dark:border-slate-800 flex-shrink-0 bg-white dark:bg-[#1E293B] shadow-[4px_0_24px_rgba(30,41,59,0.04)] flex flex-col h-full py-6">
+        <div class="px-6 mb-8">
+            <h1 class="text-xl font-black text-[#1E293B] dark:text-white mb-1">UzbekSentiment</h1>
+            <p class="text-xs text-on-primary-container font-medium">Linguistic Analysis Pro</p>
+        </div>
+        <nav class="flex-1 px-3 space-y-1">
+            <!-- Dashboard -->
+            <a class="flex items-center px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 transition-all duration-200 group"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+                <span class="font-sans text-sm font-medium tracking-tight">Dashboard</span>
+            </a>
+            <!-- Text Analysis -->
+            <a class="flex items-center px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 transition-all duration-200 group"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="analytics">analytics</span>
+                <span class="font-sans text-sm font-medium tracking-tight">Text Analysis</span>
+            </a>
+            <!-- History (ACTIVE) -->
+            <a class="flex items-center px-3 py-2.5 rounded-lg bg-slate-50 text-purple-600 font-bold border-r-4 border-purple-600 scale-[0.98] transition-transform"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="history"
+                    style="font-variation-settings: 'FILL' 1;">history</span>
+                <span class="font-sans text-sm font-medium tracking-tight">History</span>
+            </a>
+            <!-- Dictionaries -->
+            <a class="flex items-center px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 transition-all duration-200 group"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="menu_book">menu_book</span>
+                <span class="font-sans text-sm font-medium tracking-tight">Dictionaries</span>
+            </a>
+            <!-- Rules -->
+            <a class="flex items-center px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 transition-all duration-200 group"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="gavel">gavel</span>
+                <span class="font-sans text-sm font-medium tracking-tight">Rules</span>
+            </a>
+            <!-- Statistics -->
+            <a class="flex items-center px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 transition-all duration-200 group"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="bar_chart">bar_chart</span>
+                <span class="font-sans text-sm font-medium tracking-tight">Statistics</span>
+            </a>
+            <!-- Settings -->
+            <a class="flex items-center px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-50 transition-all duration-200 group"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+                <span class="font-sans text-sm font-medium tracking-tight">Settings</span>
+            </a>
+        </nav>
+        <div class="px-6 mt-auto border-t border-slate-100 pt-6">
+            <div class="flex items-center gap-3">
+                <img alt="Default user avatar"
+                    class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white text-[10px] font-bold"
+                    src="assets/default-avatar.svg" />
+                <div class="overflow-hidden">
+                    <p class="text-xs font-bold text-primary truncate">admin admin</p>
+                    <p class="text-[10px] text-slate-400 truncate">admin</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="flex-1 flex flex-col min-h-screen relative">
+        <!-- TopNavBar (Authority Source: JSON) -->
+        <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between px-8 h-16 max-w-[1440px] mx-auto">
+                <div class="flex items-center flex-1 max-w-md">
+                    <div class="relative w-full focus-within:ring-2 focus-within:ring-purple-500/20 rounded-lg">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                            data-icon="search">search</span>
+                        <input class="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-lg text-sm focus:ring-0"
+                            placeholder="Tarixdan qidirish..." type="text" />
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 ml-6">
+                    <button class="p-2 text-slate-500 hover:text-slate-900 transition-colors">
+                        <span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+                    </button>
+                    <button class="p-2 text-slate-500 hover:text-slate-900 transition-colors relative">
+                        <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                        <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+                    </button>
+                    <div class="h-6 w-[1px] bg-slate-200 mx-2"></div>
+                    <button class="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors">
+                        <span class="text-sm font-semibold">admin admin</span>
+                        <span class="material-symbols-outlined text-[20px]"
+                            data-icon="account_circle">account_circle</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <!-- Page Content -->
+        <div class="flex-1 p-8 max-w-[1440px] mx-auto w-full">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+                <div>
+                    <h2 class="font-h1 text-h1 text-primary mb-2">Tahlillar Tarixi</h2>
+                    <p class="font-body-lg text-on-surface-variant max-w-2xl">Barcha amalga oshirilgan lingvistik
+                        tahlillar va ularning natijalari jamlanmasi.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 bg-surface-container-low p-1 rounded-xl">
+                    <button
+                        class="px-5 py-2 text-sm font-bold bg-white text-purple-600 rounded-lg shadow-sm">Hammasi</button>
+                    <button
+                        class="px-5 py-2 text-sm font-medium text-slate-500 hover:bg-white/50 rounded-lg transition-all">Ijobiy</button>
+                    <button
+                        class="px-5 py-2 text-sm font-medium text-slate-500 hover:bg-white/50 rounded-lg transition-all">Salbiy</button>
+                    <button
+                        class="px-5 py-2 text-sm font-medium text-slate-500 hover:bg-white/50 rounded-lg transition-all">Neytral</button>
+                </div>
+            </div>
+            <!-- Analysis List (Bento-ish Grid / High-end Cards) -->
+            <div class="grid grid-cols-1 gap-6">
+                <!-- Item 1: Positive -->
+                <div
+                    class="group bg-white border border-outline-variant rounded-xl p-card-padding shadow-[0_4px_20px_rgba(30,41,59,0.04)] hover:shadow-[0_8px_30px_rgba(30,41,59,0.08)] transition-all duration-300 flex flex-col md:flex-row items-center gap-6">
+                    <div class="flex-1 w-full">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span
+                                class="px-2.5 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-caps text-label-caps rounded uppercase">Ijobiy</span>
+                            <span class="text-slate-400 text-xs font-medium">• 14:20, 24-May, 2024</span>
+                        </div>
+                        <p class="font-body-md text-primary leading-relaxed line-clamp-2">"Yangi tizim juda ajoyib
+                            ishlayapti, ayniqsa foydalanuvchi interfeysi sodda va tushunarli ekanligi meni quvontirdi.
+                            Katta rahmat!"</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-8 min-w-fit w-full md:w-auto justify-between md:justify-end border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-8">
+                        <div class="text-center">
+                            <p class="text-[10px] font-label-caps text-slate-400 mb-1 uppercase tracking-widest">Ishonch
+                            </p>
+                            <p class="font-h2 text-h2 text-on-tertiary-container">98.4%</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button
+                                class="w-10 h-10 rounded-full flex items-center justify-center border border-slate-200 text-slate-400 hover:text-purple-600 hover:border-purple-200 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]"
+                                    data-icon="visibility">visibility</span>
+                            </button>
+                            <button
+                                class="w-10 h-10 rounded-full flex items-center justify-center border border-slate-200 text-slate-400 hover:text-error hover:border-error-container transition-colors">
+                                <span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 2: Negative -->
+                <div
+                    class="group bg-white border border-outline-variant rounded-xl p-card-padding shadow-[0_4px_20px_rgba(30,41,59,0.04)] hover:shadow-[0_8px_30px_rgba(30,41,59,0.08)] transition-all duration-300 flex flex-col md:flex-row items-center gap-6">
+                    <div class="flex-1 w-full">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span
+                                class="px-2.5 py-1 bg-error-container text-on-error-container font-label-caps text-label-caps rounded uppercase">Salbiy</span>
+                            <span class="text-slate-400 text-xs font-medium">• 11:05, 23-May, 2024</span>
+                        </div>
+                        <p class="font-body-md text-primary leading-relaxed line-clamp-2">"Xizmat ko'rsatish sifati
+                            kutilganidan past bo'ldi. Yetkazib berish juda uzoq vaqt oldi va mijozlar qo'llab-quvvatlash
+                            xizmati qo'pol javob berdi."</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-8 min-w-fit w-full md:w-auto justify-between md:justify-end border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-8">
+                        <div class="text-center">
+                            <p class="text-[10px] font-label-caps text-slate-400 mb-1 uppercase tracking-widest">Ishonch
+                            </p>
+                            <p class="font-h2 text-h2 text-error">82.1%</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button
+                                class="w-10 h-10 rounded-full flex items-center justify-center border border-slate-200 text-slate-400 hover:text-purple-600 hover:border-purple-200 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]"
+                                    data-icon="visibility">visibility</span>
+                            </button>
+                            <button
+                                class="w-10 h-10 rounded-full flex items-center justify-center border border-slate-200 text-slate-400 hover:text-error hover:border-error-container transition-colors">
+                                <span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 3: Neutral -->
+                <div
+                    class="group bg-white border border-outline-variant rounded-xl p-card-padding shadow-[0_4px_20px_rgba(30,41,59,0.04)] hover:shadow-[0_8px_30px_rgba(30,41,59,0.08)] transition-all duration-300 flex flex-col md:flex-row items-center gap-6">
+                    <div class="flex-1 w-full">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span
+                                class="px-2.5 py-1 bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps rounded uppercase">Neytral</span>
+                            <span class="text-slate-400 text-xs font-medium">• 09:45, 22-May, 2024</span>
+                        </div>
+                        <p class="font-body-md text-primary leading-relaxed line-clamp-2">"Ertaga soat 10:00 da
+                            o'tkazilishi rejalashtirilgan majlis haqida barcha xodimlarni ogohlantirishingizni
+                            so'rayman. Kun tartibi ilova qilindi."</p>
+                    </div>
+                    <div
+                        class="flex items-center gap-8 min-w-fit w-full md:w-auto justify-between md:justify-end border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-8">
+                        <div class="text-center">
+                            <p class="text-[10px] font-label-caps text-slate-400 mb-1 uppercase tracking-widest">Ishonch
+                            </p>
+                            <p class="font-h2 text-h2 text-on-surface-variant">91.0%</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button
+                                class="w-10 h-10 rounded-full flex items-center justify-center border border-slate-200 text-slate-400 hover:text-purple-600 hover:border-purple-200 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]"
+                                    data-icon="visibility">visibility</span>
+                            </button>
+                            <button
+                                class="w-10 h-10 rounded-full flex items-center justify-center border border-slate-200 text-slate-400 hover:text-error hover:border-error-container transition-colors">
+                                <span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Empty State Section (Hidden by default, shown for UX demonstration) -->
+            <div class="hidden flex-col items-center justify-center py-20 text-center">
+                <div class="relative w-64 h-64 mb-8">
+                    <img class="w-full h-full object-contain opacity-40 grayscale"
+                        data-alt="A clean and minimalist digital illustration of a stylized archive room with empty floating shelves and a soft ethereal glow. The scene uses a monochromatic palette of pale blues and whites, symbolizing a fresh start or an empty search result. The lighting is diffused and calm, reflecting a high-end data dashboard aesthetic with zero distractions."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZBla4I-0Pm5fqnLHXH5jYIVnPpk9bydelG5VkpxvoerdnOSUCBuCArnN-GUAFDN7ubrxxiB3p9UPlisc4FqngtKxqqZKvZwsMS4T22T-OIfo0oXyLnG18JRs4Eh3xFAo6srgoIfYD0ykRmLGyKcun2cTvBGjOCWx9X774emAbLR5JkgLLcmUgP05InM7Z_HDDO-i2GlqwAQHRbYHUlUzewvNbTUgsX6x1dJqNlSNewMY5TlhfHUkmJQ5aw-_Y7IztrtEgCqnhi9Ay" />
+                </div>
+                <h3 class="font-h2 text-h2 text-primary mb-2">Tarix bo'sh</h3>
+                <p class="font-body-md text-on-surface-variant max-w-xs mx-auto">Siz hali birorta ham tahlil
+                    o'tkazmadingiz yoki qidiruv natijasida hech narsa topilmadi.</p>
+                <button
+                    class="mt-6 px-6 py-2.5 bg-primary text-white font-semibold rounded-lg hover:bg-primary-container transition-all shadow-md">
+                    Yangi tahlil boshlash
+                </button>
+            </div>
+            <!-- Pagination -->
+            <div class="mt-12 flex items-center justify-between border-t border-slate-200 pt-6">
+                <p class="text-sm text-slate-500">Jami: 42 ta tahlildan 1-3 ko'rsatilyapti</p>
+                <div class="flex gap-1">
+                    <button
+                        class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-400 hover:bg-slate-100 transition-colors">
+                        <span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+                    </button>
+                    <button
+                        class="w-9 h-9 rounded-lg flex items-center justify-center bg-purple-600 text-white font-bold text-sm">1</button>
+                    <button
+                        class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-600 hover:bg-slate-100 font-medium text-sm transition-colors">2</button>
+                    <button
+                        class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-600 hover:bg-slate-100 font-medium text-sm transition-colors">3</button>
+                    <span class="px-2 text-slate-300">...</span>
+                    <button
+                        class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-600 hover:bg-slate-100 font-medium text-sm transition-colors">14</button>
+                    <button
+                        class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-400 hover:bg-slate-100 transition-colors">
+                        <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- FAB (Suppressed on History page as per mandate unless perfectly aligned) -->
+        <!-- Logic: FAB is for "New Action" which aligns with Dashboard or Home, but suppressed here to focus on History canvas -->
+    </main>
+    <script src="js/api-client.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/history.js"></script>
+</body>
+
+</html>

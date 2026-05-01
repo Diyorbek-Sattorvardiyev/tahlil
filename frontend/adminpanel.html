@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+
+<html class="light" lang="uz">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>UzbekSentiment - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#45474c",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#545f73",
+                        "primary-fixed-dim": "#bcc7de",
+                        "outline-variant": "#c5c6cd",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "primary-container": "#1e293b",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d8dadc",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#bcc7de",
+                        "on-primary-container": "#8590a6",
+                        "primary-fixed": "#d8e3fb",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed": "#25005a",
+                        "surface-bright": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#00190e",
+                        "secondary-fixed": "#eaddff",
+                        "secondary": "#712ae2",
+                        "outline": "#75777d",
+                        "on-primary-fixed": "#111c2d",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#00301e",
+                        "primary": "#091426",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed-variant": "#3c475a",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "secondary-container": "#8a4cfc",
+                        "on-tertiary-container": "#00a472"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "stack-sm": "8px",
+                        "container-margin": "32px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "card-padding": "24px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "data-mono": ["monospace"]
+                    },
+                    "fontSize": {
+                        "h1": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h3": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-mono": ["13px", { "lineHeight": "1.4", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            background-color: #f7f9fb;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface flex min-h-screen overflow-hidden">
+    <!-- Sidebar Navigation -->
+    <aside
+        class="h-screen w-64 border-r border-slate-200 dark:border-slate-800 flex-shrink-0 bg-white dark:bg-[#1E293B] shadow-[4px_0_24px_rgba(30,41,59,0.04)] flex flex-col py-6">
+        <div class="px-6 mb-10">
+            <h1 class="text-xl font-black text-[#1E293B] dark:text-white font-h1">UzbekSentiment</h1>
+            <p class="text-[10px] uppercase tracking-widest text-on-primary-container font-label-caps">Linguistic
+                Analysis Pro</p>
+        </div>
+        <nav class="flex-1 space-y-1 px-4">
+            <!-- Dashboard Active -->
+            <a class="flex items-center px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-purple-600 dark:text-purple-400 font-bold border-r-4 border-purple-600 transition-all duration-200 scale-[0.98] active:scale-95"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+                <span class="font-sans text-sm font-medium tracking-tight">Dashboard</span>
+            </a>
+            <a class="flex items-center px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="analytics">analytics</span>
+                <span class="font-sans text-sm font-medium tracking-tight">Text Analysis</span>
+            </a>
+            <a class="flex items-center px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="history">history</span>
+                <span class="font-sans text-sm font-medium tracking-tight">History</span>
+            </a>
+            <a class="flex items-center px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="menu_book">menu_book</span>
+                <span class="font-sans text-sm font-medium tracking-tight">Dictionaries</span>
+            </a>
+            <a class="flex items-center px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="gavel">gavel</span>
+                <span class="font-sans text-sm font-medium tracking-tight">Rules</span>
+            </a>
+            <a class="flex items-center px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="bar_chart">bar_chart</span>
+                <span class="font-sans text-sm font-medium tracking-tight">Statistics</span>
+            </a>
+            <a class="flex items-center px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+                <span class="font-sans text-sm font-medium tracking-tight">Settings</span>
+            </a>
+        </nav>
+        <div class="mt-auto px-6">
+            <div class="p-4 rounded-xl bg-primary-container text-on-primary-container flex items-center space-x-3">
+                <img alt="Default user avatar" class="w-10 h-10 rounded-full border-2 border-slate-700"
+                    src="assets/default-avatar.svg" />
+                <div>
+                    <p class="text-white font-bold text-xs">admin admin</p>
+                    <p class="text-[10px] opacity-70">admin</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Canvas -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden">
+        <!-- Top Nav Bar -->
+        <header
+            class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#1E293B]/80 backdrop-blur-md shadow-sm">
+            <div class="flex items-center justify-between px-8 h-16 max-w-[1440px] mx-auto">
+                <div
+                    class="flex items-center flex-1 max-w-md focus-within:ring-2 focus-within:ring-purple-500/20 bg-surface-container-low rounded-lg px-3 py-1.5">
+                    <span class="material-symbols-outlined text-on-surface-variant text-sm"
+                        data-icon="search">search</span>
+                    <input
+                        class="bg-transparent border-none focus:ring-0 text-sm w-full font-body-md placeholder:text-slate-400"
+                        placeholder="Qidiruv..." type="text" />
+                </div>
+                <div class="flex items-center space-x-6">
+                    <button class="text-slate-500 hover:text-slate-900 transition-colors">
+                        <span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+                    </button>
+                    <button class="text-slate-500 hover:text-slate-900 relative transition-colors">
+                        <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                        <span
+                            class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+                    </button>
+                    <div class="h-8 w-px bg-slate-200"></div>
+                    <button
+                        class="flex items-center text-sm font-semibold text-purple-600 hover:text-purple-700 transition-all">
+                        <span class="mr-2">admin admin</span>
+                        <span class="material-symbols-outlined text-lg"
+                            data-icon="arrow_forward_ios">arrow_forward_ios</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <!-- Dashboard Content -->
+        <div class="p-8 max-w-[1440px] mx-auto w-full space-y-8">
+            <!-- Welcome Header -->
+            <section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-h1 font-h1 text-primary">Tizim Monitoringi</h2>
+                    <p class="text-body-lg font-body-lg text-on-surface-variant">Hush kelibsiz! O‘zbek tilidagi
+                        matnlarni tahlil qilish tizimining holati haqida qisqacha ma'lumot.</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span
+                        class="flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-label-caps font-label-caps">
+                        <span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container mr-2"></span>
+                        Tizim Barqaror
+                    </span>
+                    <span class="text-body-md font-body-md text-on-surface-variant">Oxirgi yangilanish: 14:22</span>
+                </div>
+            </section>
+            <!-- KPI Cards Bento Grid -->
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-card-padding rounded-xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-secondary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-secondary" data-icon="group">group</span>
+                        </div>
+                        <span class="text-on-tertiary-container text-xs font-bold">+12%</span>
+                    </div>
+                    <p class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase tracking-wider">
+                        Faol Foydalanuvchilar</p>
+                    <h3 class="text-h2 font-h2 text-primary">1,284</h3>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-card-padding rounded-xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-purple-100 rounded-lg">
+                            <span class="material-symbols-outlined text-purple-600" data-icon="api">api</span>
+                        </div>
+                        <span class="text-on-tertiary-container text-xs font-bold">+5.4%</span>
+                    </div>
+                    <p class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase tracking-wider">API
+                        So‘rovlar (Bugun)</p>
+                    <h3 class="text-h2 font-h2 text-primary">45.2K</h3>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-card-padding rounded-xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-error-container rounded-lg">
+                            <span class="material-symbols-outlined text-error" data-icon="bolt">bolt</span>
+                        </div>
+                        <span class="text-error text-xs font-bold">-0.8%</span>
+                    </div>
+                    <p class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase tracking-wider">
+                        O‘rtacha Kechikish</p>
+                    <h3 class="text-h2 font-h2 text-primary">124 ms</h3>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white p-card-padding rounded-xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-slate-100 rounded-lg">
+                            <span class="material-symbols-outlined text-slate-600" data-icon="database">database</span>
+                        </div>
+                        <span class="text-slate-400 text-xs">Stabillashgan</span>
+                    </div>
+                    <p class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase tracking-wider">
+                        Lug‘at Boyligi</p>
+                    <h3 class="text-h2 font-h2 text-primary">84.5K</h3>
+                </div>
+            </section>
+            <!-- Main Content Area -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+                <!-- Left Column: User Management & Analytics -->
+                <div class="lg:col-span-8 space-y-gutter">
+                    <!-- Analytics Chart Placeholder -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                        <div class="px-card-padding py-4 border-b border-slate-100 flex justify-between items-center">
+                            <h3 class="text-h3 font-h3 text-primary">Tahlillar Dinamikasi</h3>
+                            <select
+                                class="bg-surface-container-low border-none rounded-lg text-xs font-semibold focus:ring-purple-500/20">
+                                <option>Oxirgi 7 kun</option>
+                                <option>Oxirgi 30 kun</option>
+                            </select>
+                        </div>
+                        <div class="p-card-padding h-64 relative" id="admin-daily-chart">
+                            <div class="h-full flex items-center justify-center text-sm text-slate-400">
+                                Statistikalar yuklanmoqda...
+                            </div>
+                        </div>
+                    </div>
+                    <!-- User Table -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm">
+                        <div class="px-card-padding py-4 border-b border-slate-100 flex justify-between items-center">
+                            <h3 class="text-h3 font-h3 text-primary">Foydalanuvchilar Ro‘yxati</h3>
+                            <button class="text-secondary font-semibold text-sm flex items-center hover:underline">
+                                Hammasini ko‘rish
+                                <span class="material-symbols-outlined text-sm ml-1"
+                                    data-icon="open_in_new">open_in_new</span>
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-surface text-on-surface-variant">
+                                    <tr>
+                                        <th class="px-6 py-3 font-label-caps text-label-caps uppercase tracking-wider">
+                                            Foydalanuvchi</th>
+                                        <th class="px-6 py-3 font-label-caps text-label-caps uppercase tracking-wider">
+                                            Holati</th>
+                                        <th class="px-6 py-3 font-label-caps text-label-caps uppercase tracking-wider">
+                                            Oxirgi Faollik</th>
+                                        <th
+                                            class="px-6 py-3 font-label-caps text-label-caps uppercase tracking-wider text-right">
+                                            Amallar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100">
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-8 h-8 rounded-full bg-slate-200 mr-3 flex items-center justify-center font-bold text-xs text-slate-600">
+                                                    AS</div>
+                                                <div>
+                                                    <p class="text-sm font-bold text-primary">Aziz Sobirov</p>
+                                                    <p class="text-[10px] text-slate-500">aziz.s@example.uz</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span
+                                                class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold">FAOL</span>
+                                        </td>
+                                        <td class="px-6 py-4 text-xs text-on-surface-variant font-data-mono">2 min avval
+                                        </td>
+                                        <td class="px-6 py-4 text-right">
+                                            <button class="text-slate-400 hover:text-primary transition-colors">
+                                                <span class="material-symbols-outlined"
+                                                    data-icon="more_vert">more_vert</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-8 h-8 rounded-full bg-purple-100 mr-3 flex items-center justify-center font-bold text-xs text-purple-600">
+                                                    NK</div>
+                                                <div>
+                                                    <p class="text-sm font-bold text-primary">Nigora Karimova</p>
+                                                    <p class="text-[10px] text-slate-500">nigora.k@example.uz</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span
+                                                class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold">FAOL</span>
+                                        </td>
+                                        <td class="px-6 py-4 text-xs text-on-surface-variant font-data-mono">15 min
+                                            avval</td>
+                                        <td class="px-6 py-4 text-right">
+                                            <button class="text-slate-400 hover:text-primary transition-colors">
+                                                <span class="material-symbols-outlined"
+                                                    data-icon="more_vert">more_vert</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-8 h-8 rounded-full bg-slate-200 mr-3 flex items-center justify-center font-bold text-xs text-slate-600">
+                                                    JR</div>
+                                                <div>
+                                                    <p class="text-sm font-bold text-primary">Javohir Rahimov</p>
+                                                    <p class="text-[10px] text-slate-500">javohir.r@example.uz</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span
+                                                class="px-2 py-0.5 rounded-full bg-slate-200 text-on-surface-variant text-[10px] font-bold">KUTILMOQDA</span>
+                                        </td>
+                                        <td class="px-6 py-4 text-xs text-on-surface-variant font-data-mono">1 soat
+                                            avval</td>
+                                        <td class="px-6 py-4 text-right">
+                                            <button class="text-slate-400 hover:text-primary transition-colors">
+                                                <span class="material-symbols-outlined"
+                                                    data-icon="more_vert">more_vert</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column: Logs, Health & Quick Links -->
+                <div class="lg:col-span-4 space-y-gutter">
+                    <!-- Quick Management -->
+                    <div class="bg-primary-container text-white rounded-xl shadow-lg p-card-padding">
+                        <h3 class="text-h3 font-h3 mb-4">Tezkor Boshqaruv</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button
+                                class="flex flex-col items-center justify-center p-4 rounded-lg bg-white/10 hover:bg-white/20 transition-all border border-white/10 group">
+                                <span
+                                    class="material-symbols-outlined text-2xl mb-2 text-tertiary-fixed group-hover:scale-110 transition-transform"
+                                    data-icon="menu_book">menu_book</span>
+                                <span class="text-[11px] font-bold uppercase tracking-widest">Lug‘atlar</span>
+                            </button>
+                            <button
+                                class="flex flex-col items-center justify-center p-4 rounded-lg bg-white/10 hover:bg-white/20 transition-all border border-white/10 group">
+                                <span
+                                    class="material-symbols-outlined text-2xl mb-2 text-secondary-fixed-dim group-hover:scale-110 transition-transform"
+                                    data-icon="gavel">gavel</span>
+                                <span class="text-[11px] font-bold uppercase tracking-widest">Qoidalar</span>
+                            </button>
+                            <button
+                                class="flex flex-col items-center justify-center p-4 rounded-lg bg-white/10 hover:bg-white/20 transition-all border border-white/10 group">
+                                <span
+                                    class="material-symbols-outlined text-2xl mb-2 text-white/70 group-hover:scale-110 transition-transform"
+                                    data-icon="person_add">person_add</span>
+                                <span class="text-[11px] font-bold uppercase tracking-widest">Qo‘shish</span>
+                            </button>
+                            <button
+                                class="flex flex-col items-center justify-center p-4 rounded-lg bg-white/10 hover:bg-white/20 transition-all border border-white/10 group">
+                                <span
+                                    class="material-symbols-outlined text-2xl mb-2 text-white/70 group-hover:scale-110 transition-transform"
+                                    data-icon="cloud_sync">cloud_sync</span>
+                                <span class="text-[11px] font-bold uppercase tracking-widest">Yangilash</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- System Logs -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col h-[400px]">
+                        <div class="px-card-padding py-4 border-b border-slate-100 flex justify-between items-center">
+                            <h3 class="text-h3 font-h3 text-primary">Tizim Loglari</h3>
+                            <span class="material-symbols-outlined text-slate-400 cursor-pointer"
+                                data-icon="filter_list">filter_list</span>
+                        </div>
+                        <div class="flex-1 overflow-y-auto p-4 space-y-3 font-data-mono text-[11px]">
+                            <!-- Log Entry 1 (Success) -->
+                            <div
+                                class="flex items-start space-x-2 p-2 rounded bg-slate-50 border-l-2 border-on-tertiary-container">
+                                <span class="text-on-tertiary-container font-bold">INFO</span>
+                                <span class="text-slate-500">14:15:22</span>
+                                <p class="text-primary flex-1">Lug‘at yangilanishi muvaffaqiyatli yakunlandi (v2.4.1).
+                                </p>
+                            </div>
+                            <!-- Log Entry 2 (Warning) -->
+                            <div class="flex items-start space-x-2 p-2 rounded bg-slate-50 border-l-2 border-amber-400">
+                                <span class="text-amber-500 font-bold">WARN</span>
+                                <span class="text-slate-500">14:12:05</span>
+                                <p class="text-primary flex-1">API so‘rovlar chegarasi yaqinlashmoqda (User: ID_9283).
+                                </p>
+                            </div>
+                            <!-- Log Entry 3 (Error) -->
+                            <div
+                                class="flex items-start space-x-2 p-2 rounded bg-error-container/20 border-l-2 border-error">
+                                <span class="text-error font-bold">ERR</span>
+                                <span class="text-slate-500">13:58:14</span>
+                                <p class="text-primary flex-1">Morfo-tahlil moduli kutilmaganda to‘xtadi. Qayta ishga
+                                    tushirilmoqda...</p>
+                            </div>
+                            <!-- Log Entry 4 (Success) -->
+                            <div
+                                class="flex items-start space-x-2 p-2 rounded bg-slate-50 border-l-2 border-on-tertiary-container">
+                                <span class="text-on-tertiary-container font-bold">INFO</span>
+                                <span class="text-slate-500">13:45:10</span>
+                                <p class="text-primary flex-1">Yangi foydalanuvchi tizimdan ro‘yxatdan o‘tdi.</p>
+                            </div>
+                            <!-- Log Entry 5 (Info) -->
+                            <div class="flex items-start space-x-2 p-2 rounded bg-slate-50 border-l-2 border-slate-300">
+                                <span class="text-slate-500 font-bold">LOG</span>
+                                <span class="text-slate-500">13:30:00</span>
+                                <p class="text-primary flex-1">Kundalik zaxira nusxasi yaratildi.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t border-slate-100">
+                            <button
+                                class="w-full py-2 bg-surface text-on-surface-variant rounded-lg text-xs font-bold hover:bg-slate-100 transition-colors uppercase tracking-widest">
+                                Barcha loglarni yuklash
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Health Status Bar (Floating Style) -->
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="flex items-center p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
+                    <div class="relative flex h-3 w-3 mr-4">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-on-surface-variant font-label-caps uppercase">Server Holati</p>
+                        <p class="text-sm font-bold text-primary">Onlayn (Uptime: 99.9%)</p>
+                    </div>
+                </div>
+                <div class="flex items-center p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
+                    <span class="material-symbols-outlined text-purple-500 mr-4" data-icon="memory">memory</span>
+                    <div>
+                        <p class="text-[10px] text-on-surface-variant font-label-caps uppercase">RAM Ishlatilishi</p>
+                        <div class="flex items-center">
+                            <p class="text-sm font-bold text-primary mr-2">42%</p>
+                            <div class="w-24 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-purple-500 w-[42%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
+                    <span class="material-symbols-outlined text-on-tertiary-container mr-4"
+                        data-icon="storage">storage</span>
+                    <div>
+                        <p class="text-[10px] text-on-surface-variant font-label-caps uppercase">Ma'lumotlar Bazasi</p>
+                        <p class="text-sm font-bold text-primary">Sinkronizatsiya qilingan</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="js/api-client.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

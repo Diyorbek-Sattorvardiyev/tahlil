@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html class="light" lang="uz">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>UzbekSentiment - Tahlil Natijalari</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#45474c",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#545f73",
+                        "primary-fixed-dim": "#bcc7de",
+                        "outline-variant": "#c5c6cd",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "primary-container": "#1e293b",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d8dadc",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#bcc7de",
+                        "on-primary-container": "#8590a6",
+                        "primary-fixed": "#d8e3fb",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed": "#25005a",
+                        "surface-bright": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#00190e",
+                        "secondary-fixed": "#eaddff",
+                        "secondary": "#712ae2",
+                        "outline": "#75777d",
+                        "on-primary-fixed": "#111c2d",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#00301e",
+                        "primary": "#091426",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed-variant": "#3c475a",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "secondary-container": "#8a4cfc",
+                        "on-tertiary-container": "#00a472"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "stack-sm": "8px",
+                        "container-margin": "32px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "card-padding": "24px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "data-mono": ["monospace"]
+                    },
+                    "fontSize": {
+                        "h1": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h3": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "data-mono": ["13px", { "lineHeight": "1.4", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .sentiment-positive {
+            background-color: rgba(0, 164, 114, 0.1);
+            border: 1px solid rgba(0, 164, 114, 0.3);
+        }
+
+        .sentiment-negative {
+            background-color: rgba(186, 26, 26, 0.1);
+            border: 1px solid rgba(186, 26, 26, 0.3);
+        }
+
+        .sentiment-negation {
+            background-color: rgba(255, 204, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.3);
+        }
+
+        .sentiment-intensifier {
+            background-color: rgba(113, 42, 226, 0.1);
+            border: 1px solid rgba(113, 42, 226, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-surface font-body-md text-on-surface">
+    <div class="flex h-screen overflow-hidden">
+        <!-- SideNavBar -->
+        <aside
+            class="h-screen w-64 border-r border-slate-200 bg-white flex-shrink-0 flex flex-col py-6 shadow-[4px_0_24px_rgba(30,41,59,0.04)]">
+            <div class="px-6 mb-10">
+                <h1 class="text-xl font-black text-[#1E293B]">UzbekSentiment</h1>
+                <p class="text-xs font-medium tracking-tight text-slate-500">Linguistic Analysis Pro</p>
+            </div>
+            <nav class="flex-1 space-y-1">
+                <a class="flex items-center px-6 py-3 text-slate-500 hover:bg-slate-50 transition-all duration-200"
+                    href="#">
+                    <span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+                    <span class="font-sans text-sm font-medium tracking-tight">Dashboard</span>
+                </a>
+                <a class="flex items-center px-6 py-3 bg-slate-50 text-purple-600 font-bold border-r-4 border-purple-600 transition-all duration-200"
+                    href="#">
+                    <span class="material-symbols-outlined mr-3" data-icon="analytics">analytics</span>
+                    <span class="font-sans text-sm font-medium tracking-tight">Text Analysis</span>
+                </a>
+                <a class="flex items-center px-6 py-3 text-slate-500 hover:bg-slate-50 transition-all duration-200"
+                    href="#">
+                    <span class="material-symbols-outlined mr-3" data-icon="history">history</span>
+                    <span class="font-sans text-sm font-medium tracking-tight">History</span>
+                </a>
+                <a class="flex items-center px-6 py-3 text-slate-500 hover:bg-slate-50 transition-all duration-200"
+                    href="#">
+                    <span class="material-symbols-outlined mr-3" data-icon="menu_book">menu_book</span>
+                    <span class="font-sans text-sm font-medium tracking-tight">Dictionaries</span>
+                </a>
+                <a class="flex items-center px-6 py-3 text-slate-500 hover:bg-slate-50 transition-all duration-200"
+                    href="#">
+                    <span class="material-symbols-outlined mr-3" data-icon="gavel">gavel</span>
+                    <span class="font-sans text-sm font-medium tracking-tight">Rules</span>
+                </a>
+                <a class="flex items-center px-6 py-3 text-slate-500 hover:bg-slate-50 transition-all duration-200"
+                    href="#">
+                    <span class="material-symbols-outlined mr-3" data-icon="bar_chart">bar_chart</span>
+                    <span class="font-sans text-sm font-medium tracking-tight">Statistics</span>
+                </a>
+                <a class="flex items-center px-6 py-3 text-slate-500 hover:bg-slate-50 transition-all duration-200 mt-auto"
+                    href="#">
+                    <span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+                    <span class="font-sans text-sm font-medium tracking-tight">Settings</span>
+                </a>
+            </nav>
+        </aside>
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto">
+            <!-- TopNavBar -->
+            <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between px-8 h-16 max-w-[1440px] mx-auto">
+                    <div class="flex items-center flex-1 max-w-md">
+                        <div class="relative w-full focus-within:ring-2 focus-within:ring-purple-500/20 rounded-lg">
+                            <span
+                                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                            <input
+                                class="w-full pl-10 pr-4 py-2 bg-slate-100 border-none rounded-lg text-sm focus:ring-0"
+                                placeholder="Tahlillarni qidirish..." type="text" />
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <div class="flex items-center gap-4 border-r border-slate-200 pr-6">
+                            <button class="text-slate-500 hover:text-slate-900 transition-colors">
+                                <span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+                            </button>
+                            <button class="text-slate-500 hover:text-slate-900 transition-colors relative">
+                                <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                                <span class="absolute top-0 right-0 w-2 h-2 bg-purple-600 rounded-full"></span>
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="text-right">
+                                <p class="text-sm font-semibold text-[#1E293B]">admin admin</p>
+                                <p class="text-[10px] text-slate-500 font-medium">admin</p>
+                            </div>
+                            <img alt="Default user avatar" class="w-10 h-10 rounded-full border-2 border-slate-100"
+                                src="assets/default-avatar.svg" />
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Dashboard Content -->
+            <div class="p-8 max-w-[1440px] mx-auto">
+                <div class="mb-8 flex justify-between items-end">
+                    <div>
+                        <h2 class="font-h1 text-h1 text-primary mb-2">Tahlil natijalari</h2>
+                        <p class="text-on-surface-variant font-body-lg">Matnning hissiy ohangi va lingvistik tuzilishi
+                            tahlili.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <button
+                            class="px-4 py-2 border border-purple-200 text-secondary bg-purple-50 rounded-lg font-semibold flex items-center gap-2 hover:bg-purple-100 transition-colors">
+                            <span class="material-symbols-outlined text-sm">download</span> PDF Yuklash
+                        </button>
+                        <button
+                            class="px-4 py-2 bg-primary text-white rounded-lg font-semibold flex items-center gap-2 hover:bg-slate-800 transition-colors shadow-sm">
+                            <span class="material-symbols-outlined text-sm">share</span> Ulashish
+                        </button>
+                    </div>
+                </div>
+                <!-- Analysis Summary Grid -->
+                <div class="grid grid-cols-12 gap-6 mb-8">
+                    <!-- Text Highlighting View -->
+                    <div
+                        class="col-span-12 lg:col-span-8 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                        <div
+                            class="p-card-padding border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                            <h3 class="font-h3 text-h3 text-primary">Belgilangan matn</h3>
+                            <div class="flex gap-2">
+                                <span
+                                    class="px-3 py-1 sentiment-positive rounded-full text-label-caps text-on-tertiary-container flex items-center gap-1">
+                                    <span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span> Pozitiv
+                                </span>
+                                <span
+                                    class="px-3 py-1 sentiment-negative rounded-full text-label-caps text-error flex items-center gap-1">
+                                    <span class="w-2 h-2 rounded-full bg-error"></span> Negativ
+                                </span>
+                                <span
+                                    class="px-3 py-1 sentiment-negation rounded-full text-label-caps text-amber-700 flex items-center gap-1">
+                                    <span class="w-2 h-2 rounded-full bg-amber-500"></span> Inkor
+                                </span>
+                                <span
+                                    class="px-3 py-1 sentiment-intensifier rounded-full text-label-caps text-secondary flex items-center gap-1">
+                                    <span class="w-2 h-2 rounded-full bg-secondary"></span> Kuchaytiruvchi
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-8 leading-loose text-lg font-body-lg text-on-surface">
+                            "Bugun xizmat ko'rsatish sifati <span
+                                class="px-1.5 py-0.5 sentiment-intensifier rounded text-secondary font-semibold">juda</span>
+                            <span
+                                class="px-1.5 py-0.5 sentiment-positive rounded text-on-tertiary-container font-semibold">yaxshi</span>
+                            bo'ldi,
+                            lekin narxlar <span
+                                class="px-1.5 py-0.5 sentiment-negative rounded text-error font-semibold">qimmat</span>
+                            <span
+                                class="px-1.5 py-0.5 sentiment-negation rounded text-amber-700 font-semibold">emas</span>.
+                            Xodimlar <span
+                                class="px-1.5 py-0.5 sentiment-positive rounded text-on-tertiary-container font-semibold">muloyim</span>
+                            va
+                            <span
+                                class="px-1.5 py-0.5 sentiment-positive rounded text-on-tertiary-container font-semibold">tezkor</span>
+                            ishladilar.
+                            Bunday professional yondashuv <span
+                                class="px-1.5 py-0.5 sentiment-intensifier rounded text-secondary font-semibold">nihoyatda</span>
+                            <span
+                                class="px-1.5 py-0.5 sentiment-positive rounded text-on-tertiary-container font-semibold">quvontiradi</span>.
+                            Navbatlar <span
+                                class="px-1.5 py-0.5 sentiment-negative rounded text-error font-semibold">uzun</span>
+                            bo'lishiga qaramay,
+                            kutish <span
+                                class="px-1.5 py-0.5 sentiment-intensifier rounded text-secondary font-semibold">unchalik</span>
+                            <span
+                                class="px-1.5 py-0.5 sentiment-negative rounded text-error font-semibold">charchatmadu</span>."
+                        </div>
+                        <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+                            <div class="flex items-center gap-2 text-slate-500 text-sm">
+                                <span class="material-symbols-outlined text-sm">info</span>
+                                Har bir so'z ustiga bosib batafsil ma'lumot olishingiz mumkin.
+                            </div>
+                            <span class="font-data-mono text-slate-400">So'zlar soni: 42</span>
+                        </div>
+                    </div>
+                    <!-- Sentiment Meter Card -->
+                    <div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+                        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-card-padding flex-1">
+                            <h3 class="font-h3 text-h3 text-primary mb-6">Umumiy ko'rsatkich</h3>
+                            <div class="relative h-48 w-48 mx-auto mb-8">
+                                <svg class="w-full h-full -rotate-90" viewbox="0 0 100 100">
+                                    <circle cx="50" cy="50" fill="none" r="45" stroke="#f1f5f9" stroke-width="8">
+                                    </circle>
+                                    <circle cx="50" cy="50" fill="none" r="45" stroke="#00a472" stroke-dasharray="282.7"
+                                        stroke-dashoffset="70.6" stroke-width="8"></circle>
+                                </svg>
+                                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                    <span class="text-4xl font-bold text-on-tertiary-container">75%</span>
+                                    <span class="text-label-caps text-slate-400">POZITIV</span>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium text-slate-600">Ijobiy ohang</span>
+                                    <span class="text-sm font-bold text-on-tertiary-container">75%</span>
+                                </div>
+                                <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-on-tertiary-container h-full" style="width: 75%"></div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium text-slate-600">Salbiy ohang</span>
+                                    <span class="text-sm font-bold text-error">15%</span>
+                                </div>
+                                <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-error h-full" style="width: 15%"></div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium text-slate-600">Neytral</span>
+                                    <span class="text-sm font-bold text-slate-400">10%</span>
+                                </div>
+                                <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-slate-300 h-full" style="width: 10%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Explanation Logic Section: "Nega bunday natija chiqdi?" -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm mb-8 overflow-hidden">
+                    <div class="p-card-padding border-b border-slate-100 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center text-secondary">
+                            <span class="material-symbols-outlined">psychology</span>
+                        </div>
+                        <h3 class="font-h2 text-h2 text-primary">Nega bunday natija chiqdi?</h3>
+                    </div>
+                    <div class="p-card-padding grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Rule Logic Card 1 -->
+                        <div
+                            class="p-4 rounded-xl bg-surface-container-low border border-slate-200 hover:border-purple-300 transition-colors">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="material-symbols-outlined text-secondary"
+                                    style="font-variation-settings: 'FILL' 1;">bolt</span>
+                                <h4 class="font-semibold text-primary">Intensifikatsiya</h4>
+                            </div>
+                            <p class="text-sm text-on-surface-variant mb-4">
+                                <span class="font-data-mono font-bold">"juda"</span> va <span
+                                    class="font-data-mono font-bold">"nihoyatda"</span> so'zlari
+                                kontekstdagi <span class="text-on-tertiary-container font-semibold">"yaxshi"</span> va
+                                <span class="text-on-tertiary-container font-semibold">"quvontiradi"</span>
+                                so'zlarining vaznini 1.5 barobar oshirdi.
+                            </p>
+                            <div class="text-[10px] text-secondary font-bold tracking-wider uppercase">Vazn: +0.45</div>
+                        </div>
+                        <!-- Rule Logic Card 2 -->
+                        <div
+                            class="p-4 rounded-xl bg-surface-container-low border border-slate-200 hover:border-amber-300 transition-colors">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="material-symbols-outlined text-amber-500"
+                                    style="font-variation-settings: 'FILL' 1;">swap_horiz</span>
+                                <h4 class="font-semibold text-primary">Inversiya (Inkor)</h4>
+                            </div>
+                            <p class="text-sm text-on-surface-variant mb-4">
+                                <span class="font-data-mono font-bold">"emas"</span> va <span
+                                    class="font-data-mono font-bold">"-madu"</span> affiksi
+                                negativ ma'noli <span class="text-error font-semibold">"qimmat"</span> va <span
+                                    class="text-error font-semibold">"charchatmoq"</span>
+                                so'zlarini ijobiy/neytral yo'nalishga o'zgartirdi.
+                            </p>
+                            <div class="text-[10px] text-amber-600 font-bold tracking-wider uppercase">Vazn: Inversion
+                                applied</div>
+                        </div>
+                        <!-- Rule Logic Card 3 -->
+                        <div
+                            class="p-4 rounded-xl bg-surface-container-low border border-slate-200 hover:border-emerald-300 transition-colors">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="material-symbols-outlined text-on-tertiary-container"
+                                    style="font-variation-settings: 'FILL' 1;">list_alt</span>
+                                <h4 class="font-semibold text-primary">Lug'at mosligi</h4>
+                            </div>
+                            <p class="text-sm text-on-surface-variant mb-4">
+                                <span class="font-data-mono font-bold">"muloyim"</span> va <span
+                                    class="font-data-mono font-bold">"tezkor"</span> so'zlari
+                                ijobiy korpus lug'ati bilan 98% o'xshashlik bilan aniqlandi.
+                            </p>
+                            <div class="text-[10px] text-on-tertiary-container font-bold tracking-wider uppercase">Vazn:
+                                +0.22 each</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Detailed Word Table (Asymmetric Layout Part) -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="p-card-padding border-b border-slate-100">
+                        <h3 class="font-h3 text-h3 text-primary">Batafsil lingvistik jadval</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-50 text-label-caps text-slate-500 border-b border-slate-100">
+                                <tr>
+                                    <th class="px-6 py-4">Leksema</th>
+                                    <th class="px-6 py-4">Kategoriya</th>
+                                    <th class="px-6 py-4">Morfologiya</th>
+                                    <th class="px-6 py-4">Sentiment Balli</th>
+                                    <th class="px-6 py-4">Ishonch darajasi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="px-6 py-4 font-bold text-primary">yaxshi</td>
+                                    <td class="px-6 py-4"><span
+                                            class="px-2 py-0.5 sentiment-positive rounded-full text-[10px] font-bold">POZITIV</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-500">Sifat</td>
+                                    <td class="px-6 py-4 font-data-mono text-on-tertiary-container font-bold">+0.85</td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <div class="flex-1 h-1 bg-slate-100 rounded-full w-20">
+                                                <div class="h-full bg-on-tertiary-container w-[95%]"></div>
+                                            </div>
+                                            <span class="text-xs font-bold text-slate-600">95%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-bold text-primary">juda</td>
+                                    <td class="px-6 py-4"><span
+                                            class="px-2 py-0.5 sentiment-intensifier rounded-full text-[10px] font-bold">INTENSIFIER</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-500">Ravish</td>
+                                    <td class="px-6 py-4 font-data-mono text-secondary font-bold">x1.5</td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <div class="flex-1 h-1 bg-slate-100 rounded-full w-20">
+                                                <div class="h-full bg-secondary w-[100%]"></div>
+                                            </div>
+                                            <span class="text-xs font-bold text-slate-600">100%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-bold text-primary">qimmat</td>
+                                    <td class="px-6 py-4"><span
+                                            class="px-2 py-0.5 sentiment-negative rounded-full text-[10px] font-bold">NEGATIV</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-500">Sifat</td>
+                                    <td class="px-6 py-4 font-data-mono text-error font-bold">-0.62</td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <div class="flex-1 h-1 bg-slate-100 rounded-full w-20">
+                                                <div class="h-full bg-error w-[88%]"></div>
+                                            </div>
+                                            <span class="text-xs font-bold text-slate-600">88%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-bold text-primary">emas</td>
+                                    <td class="px-6 py-4"><span
+                                            class="px-2 py-0.5 sentiment-negation rounded-full text-[10px] font-bold">INKOR</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-500">Ko'makchi fe'l</td>
+                                    <td class="px-6 py-4 font-data-mono text-amber-600 font-bold">Invert</td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <div class="flex-1 h-1 bg-slate-100 rounded-full w-20">
+                                                <div class="h-full bg-amber-500 w-[92%]"></div>
+                                            </div>
+                                            <span class="text-xs font-bold text-slate-600">92%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/api-client.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/result.js"></script>
+</body>
+
+</html>
