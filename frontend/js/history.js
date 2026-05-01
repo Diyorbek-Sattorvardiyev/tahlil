@@ -8,6 +8,7 @@
     if (!list || !window.UzSentimentAPI) return;
 
     let state = { page: 1, sentiment: "", search: "" };
+    list.innerHTML = `<div class="bg-white border border-outline-variant rounded-xl p-card-padding text-center text-slate-400">Tarix yuklanmoqda...</div>`;
 
     function label(sentiment) {
         return sentiment === "IJOBIY" ? "Ijobiy" : sentiment === "SALBIY" ? "Salbiy" : "Neytral";
@@ -24,7 +25,7 @@
     }
 
     function render(items) {
-        list.innerHTML = items.map((item) => `
+        list.innerHTML = items.length ? items.map((item) => `
             <div class="group bg-white border border-outline-variant rounded-xl p-card-padding shadow-[0_4px_20px_rgba(30,41,59,0.04)] hover:shadow-[0_8px_30px_rgba(30,41,59,0.08)] transition-all duration-300 flex flex-col md:flex-row items-center gap-6 uz-animate-in">
                 <div class="flex-1 w-full">
                     <div class="flex items-center gap-3 mb-3">
@@ -48,7 +49,7 @@
                     </div>
                 </div>
             </div>
-        `).join("");
+        `).join("") : "";
 
         list.querySelectorAll("[data-open]").forEach((button) => {
             button.addEventListener("click", async () => {

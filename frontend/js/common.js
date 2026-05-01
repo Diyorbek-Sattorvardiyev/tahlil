@@ -1,10 +1,6 @@
 (function () {
     const page = location.pathname.split("/").pop() || "index.html";
     const publicPages = new Set(["login.html", "landing.html"]);
-    const DEFAULT_USER = {
-        full_name: "admin admin",
-        email: "admin",
-    };
     const DEFAULT_AVATAR = "assets/default-avatar.svg";
 
     const routes = {
@@ -21,8 +17,16 @@
         sozlamalar: "login.html",
     };
 
+    function readStoredUser() {
+        try {
+            return JSON.parse(localStorage.getItem("uzsentiment_user") || "null");
+        } catch (_) {
+            return null;
+        }
+    }
+
     function readUser() {
-        return DEFAULT_USER;
+        return readStoredUser();
     }
 
     function injectMotion() {
@@ -63,8 +67,23 @@
         });
     }
 
-    function hydrateUser() {
-        const user = readUser();
+    async function refreshUser() {
+        if (!window.UzSentimentAPI?.getToken()) {
+            return readStoredUser();
+        }
+        try {
+            const data = await window.UzSentimentAPI.request("/api/auth/me");
+            if (data?.user) {
+                localStorage.setItem("uzsentiment_user", JSON.stringify(data.user));
+                return data.user;
+            }
+        } catch (_) {
+            return readStoredUser();
+        }
+        return readStoredUser();
+    }
+
+    function hydrateUser(user = readUser()) {
         if (!user) {
             return;
         }
@@ -77,6 +96,7 @@
                 "Admin User",
                 "Aziz Rahimov",
                 "Admin Foydalanuvchi",
+                "admin admin",
                 "Profil Sozlamalari",
                 "Profile Settings",
             ].includes(value)) {
@@ -147,6 +167,7 @@
     injectMotion();
     wireNavigation();
     hydrateUser();
+    refreshUser().then(hydrateUser);
     wireTheme();
     requestAnimationFrame(animateSurface);
 

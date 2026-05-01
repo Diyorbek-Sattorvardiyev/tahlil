@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from sqlalchemy import func
 
 from extensions import db
-from models import AnalysisHistory, User
+from models import AnalysisHistory, AppLog, DictionaryWord, Rule, User
 
 
 class StatsService:
@@ -61,13 +61,18 @@ class StatsService:
     def admin_summary(self):
         today = datetime.utcnow().date()
         today_start = datetime(today.year, today.month, today.day)
+        avg = db.session.query(func.avg(AnalysisHistory.final_confidence)).scalar() or 0
         return {
             "total_users": User.query.count(),
+            "active_users": User.query.filter_by(active=True).count(),
             "total_analyses": AnalysisHistory.query.count(),
             "today_analyses": AnalysisHistory.query.filter(AnalysisHistory.created_at >= today_start).count(),
             "gemini_used": AnalysisHistory.query.filter_by(mode="GEMINI").count(),
             "dataset_used": AnalysisHistory.query.filter_by(mode="DATASET").count(),
             "hybrid_used": AnalysisHistory.query.filter_by(mode="HYBRID").count(),
+            "average_confidence": int(round(avg)),
+            "dictionary_words": DictionaryWord.query.count(),
+            "active_rules": Rule.query.filter_by(active=True).count(),
             "top_users": self.admin_user_stats(limit=5),
         }
 
@@ -98,3 +103,7 @@ class StatsService:
             }
             for row in query.all()
         ]
+
+    def admin_logs(self, limit=20):
+        rows = AppLog.query.order_by(AppLog.created_at.desc()).limit(limit).all()
+        return [row.to_dict() for row in rows]

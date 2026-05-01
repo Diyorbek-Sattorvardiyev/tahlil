@@ -31,8 +31,9 @@ class GeminiService:
 
             data = self._parse_json(raw_text)
             return {"available": True, "data": self._normalize(data), "error": None}
-        except Exception:
-            return self._unavailable("AI tahlil vaqtincha mavjud emas")
+        except Exception as exc:
+            current_app.logger.warning("Gemini analysis failed: %s", exc, exc_info=True)
+            return self._unavailable(f"AI tahlil vaqtincha mavjud emas: {exc}")
 
     def _build_prompt(self, text):
         return f"""O'zbek tilidagi quyidagi matnni his-hayajon bo'yicha tahlil qil.

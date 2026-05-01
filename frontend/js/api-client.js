@@ -7,7 +7,9 @@
 
     async function resolveApiBase() {
         const stored = getStoredBase();
-        const bases = stored ? [stored, ...DEFAULT_BASES.filter((base) => base !== stored)] : DEFAULT_BASES;
+        const sameOrigin = location.protocol.startsWith("http") ? location.origin : null;
+        const candidates = [stored, sameOrigin, ...DEFAULT_BASES].filter(Boolean);
+        const bases = [...new Set(candidates)];
 
         for (const base of bases) {
             try {

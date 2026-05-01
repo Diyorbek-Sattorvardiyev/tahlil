@@ -3,6 +3,7 @@ from flask import Blueprint, request
 from extensions import db
 from models import DictionaryWord
 from services.import_service import DictionaryImportService
+from utils.activity import log_activity
 from utils.auth import admin_required, jwt_required
 from utils.response import error_response, success_response
 from utils.text_normalizer import normalize_word
@@ -74,6 +75,7 @@ def create_word():
         source="ADMIN",
     )
     db.session.add(item)
+    log_activity("INFO", "Lug'atga yangi so'z qo'shildi", {"word": item.word, "type": item.type})
     db.session.commit()
     return success_response(item.to_dict(), 201)
 
@@ -103,6 +105,7 @@ def update_word(word_id):
     if "active" in payload:
         item.active = bool(payload["active"])
     item.source = payload.get("source", item.source or "ADMIN")
+    log_activity("INFO", "Lug'at so'zi yangilandi", {"word_id": item.id, "word": item.word})
 
     db.session.commit()
     return success_response(item.to_dict())
@@ -112,6 +115,7 @@ def update_word(word_id):
 @admin_required
 def delete_word(word_id):
     item = DictionaryWord.query.get_or_404(word_id)
+    log_activity("WARN", "Lug'at so'zi o'chirildi", {"word_id": item.id, "word": item.word})
     db.session.delete(item)
     db.session.commit()
     return success_response({"deleted": True})
@@ -126,4 +130,6 @@ def import_csv():
         data = DictionaryImportService().import_csv(request.files["file"])
     except ValueError as error:
         return error_response(str(error))
+    log_activity("INFO", "CSV orqali lug'at import qilindi", data)
+    db.session.commit()
     return success_response(data)

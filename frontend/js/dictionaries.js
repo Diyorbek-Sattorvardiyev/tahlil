@@ -6,6 +6,7 @@
     const searchInput = document.querySelector('input[placeholder*="So"]');
     const importButton = Array.from(document.querySelectorAll("button")).find((button) => button.textContent.includes("Eksport"));
     const statCards = Array.from(document.querySelectorAll(".grid.grid-cols-1.md\\:grid-cols-4 h3, .grid.grid-cols-1.md\\:grid-cols-4 .text-2xl"));
+    const staticPager = document.querySelector(".mt-auto.p-6.border-t.border-slate-100");
     const types = ["POSITIVE", "NEGATIVE", "NEGATION"];
     const typeNames = { POSITIVE: "Ijobiy", NEGATIVE: "Salbiy", NEUTRAL: "Neytral", NEGATION: "Inkor", INTENSIFIER: "Kuchaytiruvchi" };
     let words = [];
@@ -13,6 +14,8 @@
     let query = "";
 
     if (!tbody || !window.UzSentimentAPI) return;
+    tbody.innerHTML = `<tr><td colspan="5" class="px-6 py-10 text-center text-sm text-slate-400">Lug'at yuklanmoqda...</td></tr>`;
+    if (staticPager) staticPager.remove();
 
     function typeClasses(type) {
         if (type === "POSITIVE") return { icon: "bg-green-50 text-green-600", badge: "bg-green-100 text-green-700" };
@@ -44,7 +47,7 @@
 
     function renderTable() {
         const items = visibleWords();
-        tbody.innerHTML = items.map((item) => {
+        tbody.innerHTML = items.length ? items.map((item) => {
             const classes = typeClasses(item.type);
             return `
                 <tr class="hover:bg-slate-50/50 transition-colors group">
@@ -65,7 +68,7 @@
                     </td>
                 </tr>
             `;
-        }).join("");
+        }).join("") : `<tr><td colspan="5" class="px-6 py-10 text-center text-sm text-slate-400">Bu bo'limda so'zlar topilmadi.</td></tr>`;
         if (totalLabel) totalLabel.textContent = `Jami: ${items.length.toLocaleString("uz-UZ")} natija`;
 
         tbody.querySelectorAll("[data-toggle]").forEach((button) => {

@@ -1,9 +1,0 @@
-.env
-backend/.env
-
-__pycache__/
-*.py[cod]
-
-backend/venv/
-backend/instance/*.db
-instance/*.db

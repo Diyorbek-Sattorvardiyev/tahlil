@@ -2,6 +2,7 @@ from flask import Blueprint, request
 
 from extensions import db
 from models import Rule
+from utils.activity import log_activity
 from utils.auth import admin_required, jwt_required
 from utils.response import error_response, success_response
 from utils.validators import require_fields
@@ -32,6 +33,7 @@ def create_rule():
         active=bool(payload.get("active", True)),
     )
     db.session.add(rule)
+    log_activity("INFO", "Yangi qoida qo'shildi", {"name": rule.name, "rule_type": rule.rule_type})
     db.session.commit()
     return success_response(rule.to_dict(), 201)
 
@@ -47,6 +49,7 @@ def update_rule(rule_id):
             setattr(rule, field, str(payload[field]).strip())
     if "active" in payload:
         rule.active = bool(payload["active"])
+    log_activity("INFO", "Qoida yangilandi", {"rule_id": rule.id, "active": rule.active})
 
     db.session.commit()
     return success_response(rule.to_dict())
@@ -56,6 +59,7 @@ def update_rule(rule_id):
 @admin_required
 def delete_rule(rule_id):
     rule = Rule.query.get_or_404(rule_id)
+    log_activity("WARN", "Qoida o'chirildi", {"rule_id": rule.id, "name": rule.name})
     db.session.delete(rule)
     db.session.commit()
     return success_response({"deleted": True})

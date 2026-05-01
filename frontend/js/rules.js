@@ -9,6 +9,7 @@
     if (!tableBody || !window.UzSentimentAPI) return;
 
     let rules = [];
+    tableBody.innerHTML = `<tr><td colspan="5" class="px-6 py-10 text-center text-sm text-slate-400">Qoidalar yuklanmoqda...</td></tr>`;
 
     function iconFor(type) {
         if (type.includes("NEG")) return "do_not_disturb_on";
@@ -37,7 +38,7 @@
 
     function renderFeatured() {
         if (!featuredGrid) return;
-        featuredGrid.innerHTML = rules.slice(0, 4).map((rule) => {
+        featuredGrid.innerHTML = rules.length ? rules.slice(0, 4).map((rule) => {
             const colors = colorClasses(rule.rule_type);
             return `
                 <div class="bg-white border border-slate-200 rounded-xl p-card-padding shadow-[0_4px_16px_rgba(30,41,59,0.02)] hover:shadow-md transition-shadow uz-animate-in">
@@ -55,14 +56,14 @@
                     <p class="text-sm text-on-surface-variant leading-relaxed">${rule.description}</p>
                 </div>
             `;
-        }).join("");
+        }).join("") : `<div class="col-span-12 bg-white border border-slate-200 rounded-xl p-card-padding text-center text-slate-400">Qoidalar hali qo'shilmagan.</div>`;
         featuredGrid.querySelectorAll("[data-toggle]").forEach((input) => {
             input.addEventListener("change", () => toggleRule(input.dataset.toggle, input.checked));
         });
     }
 
     function renderTable() {
-        tableBody.innerHTML = rules.map((rule) => `
+        tableBody.innerHTML = rules.length ? rules.map((rule) => `
             <tr class="hover:bg-slate-50/50 transition-colors">
                 <td class="px-6 py-4 font-medium text-primary">${rule.name}</td>
                 <td class="px-6 py-4 font-data-mono text-xs text-secondary">${rule.description}</td>
@@ -76,7 +77,7 @@
                     <button data-delete="${rule.id}" class="text-slate-400 hover:text-error transition-colors"><span class="material-symbols-outlined">delete</span></button>
                 </td>
             </tr>
-        `).join("");
+        `).join("") : `<tr><td colspan="5" class="px-6 py-10 text-center text-sm text-slate-400">Qoidalar topilmadi.</td></tr>`;
         tableBody.querySelectorAll("[data-delete]").forEach((button) => {
             button.addEventListener("click", async () => {
                 await window.UzSentimentAPI.request(`/api/rules/${button.dataset.delete}`, { method: "DELETE" });

@@ -11,6 +11,19 @@
         return "bg-slate-100 text-slate-700";
     }
 
+    function clearStaticResult() {
+        const textBlock = Array.from(document.querySelectorAll("h3")).find((heading) =>
+            heading.textContent.includes("Belgilangan matn")
+        )?.closest(".rounded-xl")?.querySelector(".p-8");
+        if (textBlock) textBlock.textContent = "Natija yuklanmoqda...";
+        const explanationWrap = Array.from(document.querySelectorAll("h3")).find((heading) =>
+            heading.textContent.includes("Nega")
+        )?.closest(".rounded-xl")?.querySelector(".grid");
+        if (explanationWrap) explanationWrap.innerHTML = `<div class="col-span-full text-center text-slate-400 py-8">Izohlar yuklanmoqda...</div>`;
+        const tbody = document.querySelector("tbody.divide-y");
+        if (tbody) tbody.innerHTML = `<tr><td colspan="5" class="px-6 py-10 text-center text-sm text-slate-400">So'zlar yuklanmoqda...</td></tr>`;
+    }
+
     function render(text, payload) {
         const dataset = payload.dataset_result || {};
         const gemini = payload.gemini_result || {};
@@ -57,7 +70,7 @@
             heading.textContent.includes("Nega")
         )?.closest(".rounded-xl")?.querySelector(".grid");
         if (explanationWrap) {
-            explanationWrap.innerHTML = (dataset.explanation || []).map((item) => `
+            explanationWrap.innerHTML = (dataset.explanation || []).length ? dataset.explanation.map((item) => `
             <div class="p-4 rounded-xl bg-surface-container-low border border-slate-200">
                 <div class="flex items-center gap-2 mb-3">
                     <span class="material-symbols-outlined text-secondary">psychology</span>
@@ -65,12 +78,12 @@
                 </div>
                 <p class="text-sm text-on-surface-variant">${item}</p>
             </div>
-        `).join("");
+        `).join("") : `<div class="col-span-full text-center text-slate-400 py-8">Ushbu tahlil uchun qo'shimcha izoh mavjud emas.</div>`;
         }
 
         const tbody = document.querySelector("tbody.divide-y");
         if (tbody) {
-            tbody.innerHTML = (dataset.detected_words || []).map((item) => `
+            tbody.innerHTML = (dataset.detected_words || []).length ? dataset.detected_words.map((item) => `
             <tr>
                 <td class="px-6 py-4 font-bold text-primary">${item.word}</td>
                 <td class="px-6 py-4"><span class="px-2 py-0.5 ${sentimentClass(item.type)} rounded-full text-[10px] font-bold">${item.type}</span></td>
@@ -78,7 +91,7 @@
                 <td class="px-6 py-4 font-data-mono text-primary font-bold">${item.score ?? item.effect ?? 0}</td>
                 <td class="px-6 py-4 text-xs font-bold text-slate-600">${dataset.confidence || 0}%</td>
             </tr>
-        `).join("");
+        `).join("") : `<tr><td colspan="5" class="px-6 py-10 text-center text-sm text-slate-400">Lug'atdan mos so'z topilmadi.</td></tr>`;
         }
 
         const title = document.querySelector("h2.font-h1");
@@ -122,5 +135,6 @@
         });
     }
 
+    clearStaticResult();
     load().catch((error) => window.UzSentimentUI?.toast(error.message, "error"));
 })();

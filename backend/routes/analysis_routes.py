@@ -5,6 +5,7 @@ from flask import Blueprint, current_app, g, request
 from extensions import db
 from models import AnalysisHistory
 from services.hybrid_service import HybridService
+from utils.activity import log_activity
 from utils.auth import jwt_required
 from utils.response import error_response, success_response
 from utils.text_normalizer import normalize_text
@@ -57,6 +58,11 @@ def analyze():
         gemini_result_json=json.dumps(gemini if gemini else {}, ensure_ascii=False),
     )
     db.session.add(history)
+    log_activity(
+        "INFO",
+        "Matn tahlili bajarildi",
+        {"user_id": g.current_user.id, "mode": mode, "sentiment": final.get("sentiment")},
+    )
     db.session.commit()
 
     return success_response(result)

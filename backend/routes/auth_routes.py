@@ -2,6 +2,7 @@ from flask import Blueprint, g, request
 
 from extensions import db
 from models import User
+from utils.activity import log_activity
 from utils.auth import create_token, hash_password, jwt_required, verify_password
 from utils.response import error_response, success_response
 from utils.validators import is_valid_email, normalize_email, require_fields
@@ -36,6 +37,7 @@ def register():
         role=role,
     )
     db.session.add(user)
+    log_activity("INFO", "Yangi foydalanuvchi ro'yxatdan o'tdi", {"email": email, "role": role})
     db.session.commit()
 
     return success_response({"user": user.to_dict(), "token": create_token(user)}, 201)
@@ -52,6 +54,8 @@ def login():
     if not user or not user.active or not verify_password(user.password_hash, str(payload["password"])):
         return error_response("Email yoki parol noto'g'ri", 401)
 
+    log_activity("INFO", "Foydalanuvchi tizimga kirdi", {"user_id": user.id, "email": user.email})
+    db.session.commit()
     return success_response({"user": user.to_dict(), "token": create_token(user)})
 
 
